@@ -21,7 +21,7 @@ This long range genetic information allows us to map into repeat regions
 of the genome using either flanking unique sequence as is the case for short exact repeats or rare interspersed differences typical of 
 segmental duplications. Segmental duplications are increasingly being recognized as the source of new gene creation as well as gene dosing variation. 
 You can read more about this method on my white paper <a href="../projects/lariat.pdf">here</a>. I was lead on this project and presented my findings 
-at Genome Informatics in September 2016. My poster is <a href="../projects/GIposter.pptx>here"</a>.
+at Genome Informatics in September 2016. My poster is <a href="../projects/GIposter.pptx">here</a>.
 
 ### PHASING LONG MOLECULES
 
