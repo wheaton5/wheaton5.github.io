@@ -11,7 +11,7 @@ I have been at [10X Genomics](http://www.10xgenomics.com) since October 2014, wh
 
 The 10X platform starts with high molecular weight DNA input into a microfluidic system which partitions those long DNA molecules into "GEMs" (Gel bead in emulsion) with oil surrounding an aqueous solution containing the DNA and reagents surrounding a gel bead containing millions of copies of the same barcode DNA sequence. Each different gel bead has a different barcode DNA oligo with high probability. Each GEM gets roughly 10 long DNA molecules. So when you map the reads from a single barcodes, they cluster into a few small regions of the genome associated with their molecule of origin. 
 
-This can be done for either whole genome or exome.
+This can be done for either whole genome or targeted sequencing while retaining the linked read long range information.
 <img src="../projects/genomeexome.jpg" alt="WGS or WES 10X linked reads" style="align:center">
 
 ### PHASING LONG MOLECULES
