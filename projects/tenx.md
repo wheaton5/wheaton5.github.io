@@ -20,7 +20,7 @@ This can be done for either whole genome or targeted sequencing while retaining 
 This long range genetic information allows us to map into repeat regions 
 of the genome using either flanking unique sequence as in the case or short exact repeats or rare interspersed differences typical of longer 
 segmental duplications. Segmental duplications are increasingly being recognized as the source of new gene creation as well as gene dosing variation. 
-You can read more about this method on my white paper <a href="../projects/lariat.pdf">here</a>. I was lead on this project and presented my findings 
+You can read more about this method on my <a href="../projects/lariat.pdf">white paper</a>. I was lead on this project and presented my findings 
 at Genome Informatics in September 2016. My poster is <a href="../projects/GIposter.pptx">here</a>.
 
 ### PHASING LONG MOLECULES
@@ -31,4 +31,4 @@ at Genome Informatics in September 2016. My poster is <a href="../projects/GIpos
 
 The 10X platform can also be used for haplotype phasing. Because there are so many partitions/barcodes and each barcode has so few DNA molecules, the chance that a barcode has 2 molecules from the same locus in the genome but opposite haplotypes is vanishingly small. Based on this, for each cluster of reads on the genome from one barcode, the chances that all of those reads come from the same haplotype is exceedingly high. We can use this long range information to link alleles from multiple heterozygous variants into haplotypes. Then more molecules can link those alleles to even more alleles and proceeding this way we can create phase blocks that span megabases or even whole chromosome arms. 
 
-I contributed to the phasing algorithm and extended it from phasing variants to phasing molecules and all of their reads. With this information it makes normally difficult to call variant types like heterozygous deletions much easier. I also designed and implemented an algorithm to use the phasing to filter false positives that do not segregate on haplotype lines. In this same algorithm I can correct genotypes of variants that were falsely called heterozygous which were in reality homozygous. The details of this algorithm can be found on our white paper <a href="../projects/phasing10x.pdf">here</a>.
+I contributed to the phasing algorithm and extended it from phasing variants to phasing molecules and all of their reads. With this information it makes normally difficult to call variant types like heterozygous deletions much easier. I also designed and implemented an algorithm to use the phasing to filter false positives that do not segregate on haplotype lines. In this same algorithm I can correct genotypes of variants that were falsely called heterozygous which were in reality homozygous. The details of this algorithm can be found on our <a href="../projects/phasing10x.pdf">phasing white paper</a>.
