@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+    .node {
+        stroke: #fff;
+        stroke-width: 2px;
+    }
+
+    .link {
+        stroke-opacity: .6;
+    }
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var width = 960,
+        height = 500;
+var node_size_increment = 4;
+var node_size_initial = 8;
+var edge_eccentricity = 30;
+
+var color = d3.scale.category10();
+var nodes = [],
+    links = [];
+
+var force = d3.layout.force()
+        .nodes(nodes)
+        .links(links)
+        .charge(-600)
+        .linkDistance(150)
+        .size([width, height])
+        .on("tick", tick);
+
+var target, source;
+
+var svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+
+var node = svg.selectAll(".node"),
+        link = svg.selectAll(".link");
+
+var contractTime = 1750;
+var betweenContractAndHighlight = 500;
+var betweenHighlightAndContract = 1250;
+var timeBetweenResets = 1000;
+var iteration = 0;
+
+var textKargersIteration = ["Iteration of Karger's min-cut algorithm.\n",
+        "A random edge is selected (highlighted green) and contracted. Self edges are deleted.\n",
+        "When there are only 2 nodes left, the remaining edges represent a cut in the original graph."];
+
+svg.selectAll("text").data(textKargersIteration).enter().append("text")
+        .attr("x", 20)
+        .attr("y", function(d,i){return (i+1)*20;})
+        .text(function(d){return d;})
+
+nodes.push({name: "v0.4", children: [], parent: [], size: node_size_initial},//0
+        {name: "v1.3", children: [], parent: [], size: node_size_initial},//1
+        {name: "v3.2", children: [], parent: [], size: node_size_initial},//2
+        {name: "v5.2", children: [], parent: [], size: node_size_initial},//3
+        {name: "v4.2", children: [], parent: [], size: node_size_initial},//4
+        {name: "v2.2", children: [], parent: [], size: node_size_initial},//5
+        {name: "v3.3", children: [], parent: [], size: node_size_initial},//6
+        {name: "v0.5", children: [], parent: [], size: node_size_initial},//7
+        {name: "v1.4", children: [], parent: [], size: node_size_initial},//8
+        {name: "v5.3", children: [], parent: [], size: node_size_initial},//9
+        {name: "v2.3", children: [], parent: [], size: node_size_initial},//10
+        {name: "v0.6", children: [], parent: [], size: node_size_initial},//11
+        {name: "v3.6", children: [], parent: [], size: node_size_initial},//12
+        {name: "v5.4", children: [], parent: [], size: node_size_initial},//13
+        {name: "v4.3", children: [], parent: [], size: node_size_initial});//14
+
+var allnodes = [];
+for(var i = 0; i < nodes.length; i++){
+    allnodes.push(nodes[i]);
+}
+links.push(
+        {source: nodes[0] , target: nodes[1], color: "#999" , weight: 3},//0
+        {source: nodes[0] , target: nodes[2], color: "#999" , weight: 3},//1
+        {source: nodes[0] , target: nodes[3], color: "#999" , weight: 3},//2
+        {source: nodes[0] , target: nodes[4], color: "#999" , weight: 3},//3
+        {source: nodes[1] , target: nodes[2], color: "#999" , weight: 3},//4
+        {source: nodes[1] , target: nodes[3], color: "#999" , weight: 3},//5
+        {source: nodes[1] , target: nodes[4], color: "#999" , weight: 3},//6
+        {source: nodes[1] , target: nodes[5], color: "#999" , weight: 3},//7
+        {source: nodes[2] , target: nodes[3], color: "#999" , weight: 3},//8
+        {source: nodes[2] , target: nodes[4], color: "#999" , weight: 3},//9
+        {source: nodes[3] , target: nodes[4], color: "#999" , weight: 3},//10
+        {source: nodes[4] , target: nodes[5], color: "#999" , weight: 3},//11
+        {source: nodes[5] , target: nodes[6], color: "#999" , weight: 3},//12
+        {source: nodes[5] , target: nodes[7], color: "#999" , weight: 3},//13
+        {source: nodes[5] , target: nodes[9], color: "#999" , weight: 3},//14
+        {source: nodes[6] , target: nodes[7], color: "#999" , weight: 3},//15
+        {source: nodes[6] , target: nodes[8], color: "#999" , weight: 3},//16
+        {source: nodes[6] , target: nodes[9], color: "#999" , weight: 3},//17
+        {source: nodes[7] , target: nodes[8], color: "#999" , weight: 3},//18
+        {source: nodes[7] , target: nodes[9], color: "#999" , weight: 3},//19
+        {source: nodes[8] , target: nodes[9], color: "#999" , weight: 3},//20
+        {source: nodes[8] , target: nodes[10], color: "#999" , weight: 3},//21
+        {source: nodes[8] , target: nodes[14], color: "#999" , weight: 3},//22
+        {source: nodes[10] , target: nodes[11], color: "#999" , weight: 3},//23
+        {source: nodes[10] , target: nodes[12], color: "#999" , weight: 3},//24
+        {source: nodes[10] , target: nodes[13], color: "#999" , weight: 3},//25
+        {source: nodes[10] , target: nodes[14], color: "#999" , weight: 3},//26
+        {source: nodes[11] , target: nodes[12], color: "#999" , weight: 3},//27
+        {source: nodes[11] , target: nodes[13], color: "#999" , weight: 3},//28
+        {source: nodes[11] , target: nodes[14], color: "#999" , weight: 3},//29
+        {source: nodes[12] , target: nodes[13], color: "#999" , weight: 3},//30
+        {source: nodes[12] , target: nodes[14], color: "#999" , weight: 3},//31
+        {source: nodes[13] , target: nodes[14], color: "#999" , weight: 3}//32
+);
+for(var ii = 0; ii < links.length; ii++){
+    links[ii].name = ii;
+}
+var linksDeepCopy = [];
+for(var ii = 0; ii < links.length; ii++){
+    linksDeepCopy.push({source: links[ii].source, target: links[ii].target, color: "#999", weight: 3, name: links[ii].name});
+}
+
+
+
+var seed = 1;
+function random() {
+    var x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+}
+
+function highlightEdge(){
+    var sum = 0;
+    for(var ii = 0; ii < links.length; ii++){
+        sum += links[ii].weight;
+    }
+    var edgetotal = random() * (sum-3);
+    var cumulative = 0;
+    var edgenum = 0;
+
+    for(var ii = 0; ii < links.length; ii++){
+        cumulative += links[ii].weight;
+        if(cumulative >= edgetotal){
+            edgenum = ii;
+            break;
+        }
+    }
+    if(nodes.length == 2){
+
+        if(links.length < bestSoFarCut){
+            updateBestSoFar();
+            bestSoFarCut = links.length;
+        }
+        setTimeout(resetMain, timeBetweenResets)
+        if(iteration == 0){
+            contractTime = 200;
+            betweenContractAndHighlight = 0;
+            betweenHighlightAndContract = 200;
+            timeBetweenResets = 1000;
+        }
+        iteration++;
+        return;
+    }
+    links[edgenum].color = "green";
+    svg.selectAll(".link")
+            .data(links, function(d){ return d.name;})
+            .attr("stroke",function(d){return d.color;});
+
+    setTimeout(contractEdge, betweenHighlightAndContract, edgenum)
+}
+
+function resetMain(){
+    force.stop();
+    links = [];
+    nodes = [];
+    force.nodes(nodes);
+    force.links(links);
+
+    link = link.data(force.links(), function(d) { return d.name; });
+    node = node.data(force.nodes(), function(d) { return d.name; });
+    node.exit().remove();
+    link.exit().remove();
+
+
+    for(var ii = 0; ii < linksDeepCopy.length; ii++){
+        links.push({source: linksDeepCopy[ii].source, target: linksDeepCopy[ii].target, color: "#999", weight: 3, name: linksDeepCopy[ii].name})
+    }
+    console.log("allnodes "+allnodes.length);
+    for(var ii = 0; ii < allnodes.length; ii++){
+        nodes.push({name: allnodes[ii].name, children: [], parent: [], size: node_size_initial});
+    }
+    for(var ii = 0; ii < links.length; ii++){
+        for(var jj = 0; jj < nodes.length; jj++){
+            if(links[ii].source.name === nodes[jj].name)links[ii].source = nodes[jj];
+            if(links[ii].target.name === nodes[jj].name)links[ii].target = nodes[jj];
+        }
+    }
+    allnodes = [];
+    for(var ii = 0; ii < nodes.length; ii++){
+        allnodes.push(nodes[ii]);
+    }
+    force.links(links);
+    force.nodes(nodes);
+    start();
+    setTimeout(highlightEdge,timeBetweenResets);
+}
+
+var bestSoFarNodes = [];
+var bestSoFarLinks = [];
+
+var svgBestSoFar = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+var textKargersBestSoFar = ["Best cut so far highlighted in red below."];
+svgBestSoFar.selectAll("text").data(textKargersBestSoFar).enter().append("text")
+        .attr("x", 20)
+        .attr("y", 20)
+        .text(function(d){return d;});
+var nodeB = svgBestSoFar.selectAll(".node"),
+        linkB = svgBestSoFar.selectAll(".link");
+var bestSoFarCut = 10000000;
+var bestSoFarForce = d3.layout.force()
+        .nodes(bestSoFarNodes)
+        .links(bestSoFarLinks)
+        .charge(-600)
+        .linkDistance(150)
+        .size([width, height])
+        .on("tick", tickBestSoFar);
+
+function updateBestSoFar(){
+    bestSoFarNodes = [];
+    bestSoFarLinks = [];
+
+    bestSoFarForce.links(bestSoFarLinks);
+    bestSoFarForce.nodes(bestSoFarNodes);
+    linkB = linkB.data(bestSoFarForce.links(), function(d) { return d.name; });
+    nodeB = nodeB.data(bestSoFarForce.nodes(), function(d) { return d.name; });
+    linkB.exit().remove();
+    nodeB.exit().remove();
+
+    for(var i = 0; i < linksDeepCopy.length; i++){
+        bestSoFarLinks.push({source: linksDeepCopy[i].source , target: linksDeepCopy[i].target, color: "#999" , weight: 3, name: linksDeepCopy[i].name});
+    }
+    for(var i = 0; i < allnodes.length; i++){
+        bestSoFarNodes.push({name: allnodes[i].name, children: [], parent: [], size: node_size_initial});
+    }
+    for(var i = 0; i < linksDeepCopy.length; i++){
+        for(var j = 0; j < bestSoFarNodes.length; j++){
+            if(bestSoFarLinks[i].source.name === bestSoFarNodes[j].name)bestSoFarLinks[i].source = bestSoFarNodes[j];
+            if(bestSoFarLinks[i].target.name === bestSoFarNodes[j].name)bestSoFarLinks[i].target = bestSoFarNodes[j];
+        }
+    }
+
+    for(var i = 0; i < links.length; i++){
+        for(var j = 0; j < bestSoFarLinks.length; j++){
+            if(links[i].name === bestSoFarLinks[j].name){
+                bestSoFarLinks[j].color = "red";
+                break;
+            }
+        }
+    }
+
+
+    bestSoFarForce.nodes(bestSoFarNodes);
+    bestSoFarForce.links(bestSoFarLinks);
+    linkB = linkB.data(bestSoFarForce.links(), function(d) { return d.name; });
+    nodeB = nodeB.data(bestSoFarForce.nodes(), function(d) { return d.name; });
+    console.log("bsetSoFarLinks size "+bestSoFarLinks.length+" "+bestSoFarForce.links().length);
+    linkB.enter()
+            .append("path", ".node")
+            .attr("class", "link")
+            .attr("stroke",function(d){
+                console.log("entering link "+ d.name+" for bestSoFar");
+                return d.color;
+            })
+            .style("stroke-width", function(d){
+                return (d.weight+"px");
+            }). attr("fill", "none");
+
+    nodeB.enter()
+            .append("circle")
+            .attr("class", "node")
+            .style("fill",function(d){
+                console.log("entering bestsofor nodeb "+ d.name);
+                if(d.name.indexOf("v0") !== -1){
+                    return "black";
+                }
+                else if(d.name.indexOf("v1") !== -1){
+                    return "blue";
+                }
+                else if(d.name.indexOf("v2") !== -1){
+                    return "red";
+                }
+                else if(d.name.indexOf("v3") !== -1){
+                    return "green";
+                }
+                else if(d.name.indexOf("v4") !== -1){
+                    return "orange";
+                }
+                else return "gray";
+            })
+            .attr("r", node_size_initial)
+            .call(bestSoFarForce.drag);
+
+    bestSoFarForce.start();
+
+}
+
+
+d3.selection.prototype.moveToFront = function() {
+    return this.each(function(){
+        this.parentNode.appendChild(this);
+    });
+};
+
+function contractEdge(edgenum){
+    var edge = links[edgenum];
+    source = edge.source;
+    target = edge.target;
+
+    var nodeToRemove;
+    for(var ii = 0; ii < nodes.length; ii++){
+        if(nodes[ii].name === target.name){
+            nodeToRemove = ii;
+        }
+    }
+
+    var numberIncomingNodes = 1 + target.children.length;
+    source.size += numberIncomingNodes * node_size_increment;
+    for(var i = 0; i < source.children.length; i++) source.children[i].size += numberIncomingNodes * node_size_increment;
+    source.children.push(target);
+    target.parent.push(source);
+
+
+    for(var i = 0; i < target.children.length; i++){
+        target.children[i].parent[0] = source;
+        source.children.push(target.children[i]);
+    }
+
+    bubbleSortNodes(source.children);
+    var sourceAndChildren = [source];
+    svg.selectAll("circle").data([source], function(d){return d.name;}).moveToFront();
+    for(var i = 0; i < source.children.length; i++){
+        svg.selectAll("circle").data([source.children[i]], function(d){return d.name;}).moveToFront();
+    }
+
+
+    var edgeToRemove = [];
+    var edgeToAdd = [];
+    for(var ii = 0; ii < links.length; ii++){
+        links[ii].newsource = links[ii].source;
+        links[ii].newtarget = links[ii].target;
+        if(links[ii].source.name === target.name){
+            if(links[ii].target.name !== source.name){
+                links[ii].newsource = source;
+                links[ii].source = source;
+            }
+            else{
+                edgeToRemove.push(ii);
+            }
+        }
+        else if(links[ii].target.name === target.name){
+            if(links[ii].source.name !== source.name){
+                links[ii].newtarget = source;
+                links[ii].target = source;
+            }
+            else{
+                edgeToRemove.push(ii);
+            }
+            links[ii].target = source;
+        }
+    }
+
+    //stop the force model while the animation happens
+    force.stop();
+
+    setTimeout(deleteEdges, contractTime, edgeToRemove, nodeToRemove);
+
+    svg.selectAll("circle").data(allnodes, function(d){return d.name;})
+            .transition().duration(contractTime)
+            .attr("cx", function(d){if(d.parent.length > 0 && d.parent[0].name === source.name) return source.x; else return d3.select(this).attr("cx");})
+            .attr("cy", function(d){if(d.parent.length > 0 && d.parent[0].name === source.name) return source.y; else return d3.select(this).attr("cy");})
+            .attr("r", function(d){return d.size;});
+
+    force.links(links);
+    link = link.data(force.links(), function(d){return d.name;});
+
+    link.transition().duration(contractTime).attr("d", edgeTransition);
+
+
+    setTimeout(highlightEdge, contractTime+betweenContractAndHighlight)
+}
+
+function deleteEdges(edgeToRemove, nodeToRemove){
+
+    for(var ii = 0; ii < edgeToRemove.length; ii++){
+        var eR = edgeToRemove[ii];
+        for(var jj = ii+1; jj < edgeToRemove.length; jj++){
+            if(edgeToRemove[jj] > eR){
+                edgeToRemove[jj] = edgeToRemove[jj] - 1; // update indices of edges
+                // with indices greater than the edge we are about to remove
+            }
+        }
+        links = links.slice(0, eR).concat(links.slice(eR + 1)); //delete this edge
+    }
+
+    nodes = nodes.slice(0,nodeToRemove)
+            .concat(nodes.slice(nodeToRemove+1) );//delete this node
+
+    for(var ii = 0; ii < links.length; ii++){
+        links[ii].source = links[ii].newsource;
+        links[ii].target = links[ii].newtarget;
+    }
+
+    svg.selectAll(".link")
+            .data(links, function(d){return (d.name);})
+            .exit().remove();
+
+    force.nodes(nodes);
+    force.links(links);
+
+    svg.selectAll("circle")
+            .data(nodes, function(d){return d.name}).exit()
+            .attr("cx", function(d){return d.parent[0].x;})
+            .attr("cy",function(d){return d.parent[0].y;});
+
+    force.resume();
+
+}
+
+start();
+setTimeout(highlightEdge,2000);
+
+function start() {
+    force.nodes(nodes);
+    force.links(links);
+
+    link = link.data(force.links(), function(d) { return (d.name); });
+
+    link.enter()
+            .append("path", ".node")
+            .attr("class", "link")
+            .attr("stroke",function(d){
+                console.log("link "+d.name+" entering whoop");
+                return d.color;
+            })
+            .style("stroke-width", function(d){
+                return (d.weight+"px");
+            }). attr("fill", "none");
+
+    console.log("nodes in nodes "+nodes.length+" "+force.nodes().length);
+    for(var i = 0; i < nodes.length; i++)console.log(nodes[i].name);
+    node = node.data(force.nodes(), function(d) { return d.name;});
+    var group = node.enter()
+            .append("circle")
+            .attr("class", "node")
+            .style("fill",function(d){
+                console.log("node  entering "+ d.name);
+                if(d.name.indexOf("v0") !== -1){
+                    return "black";
+                }
+                else if(d.name.indexOf("v1") !== -1){
+                    return "blue";
+                }
+                else if(d.name.indexOf("v2") !== -1){
+                    return "red";
+                }
+                else if(d.name.indexOf("v3") !== -1){
+                    return "green";
+                }
+                else if(d.name.indexOf("v4") !== -1){
+                    return "orange";
+                }
+                else return "gray";
+            })
+            .attr("r", node_size_initial)
+            .call(force.drag);
+
+    force.start();
+}
+
+function bubbleSortNodes(n){
+    for(var i = 0; i < n.length; i++){
+        for(var j = 0; j < n.length-1; j++){
+            if(n[j].size < n[j+1].size){
+                var temp = n[j];
+                n[j] = n[j+1];
+                n[j+1] = temp;
+            }
+        }
+    }
+}
+
+function tickBestSoFar(){
+    svgBestSoFar.selectAll("circle").data(bestSoFarNodes, function(d){return d.name;})
+            .attr("cx", function(d) { return d.x;})
+            .attr("cy", function(d){ return d.y;})
+            .attr("r", function(d){return node_size_initial;});
+
+    linkB.attr("d", noCurve);
+}
+
+
+function tick() {
+    svg.selectAll("circle").data(allnodes, function(d){return d.name;})
+            .attr("cx", function(d) {
+                if(d.parent.length !== 0){ return d.parent[0].x;}
+                else return d.x;
+            })
+            .attr("cy", function(d){
+                if(d.parent.length !== 0){ return d.parent[0].y; }
+                else return d.y;
+            })
+            .attr("r", function(d){return d.size;});
+
+    link.attr("d", quadCurve);
+}
+
+function quadCurve(d){
+    var centerx = (d.source.x + d.target.x) / 2;
+    var centery = (d.source.y + d.target.y) / 2;
+    var slope = -1 / ((d.source.y - d.target.y) / (d.source.x - d.target.x));
+    var magnitude = Math.sqrt(1 + slope * slope);
+    var dynorm = slope / magnitude;
+    var dxnorm = 1 / magnitude;
+    //find some way to determine a multiplier
+    var mult = edge_eccentricity * edgePosition(d.source.name, d.target.name, d.name);
+
+    var controlx = centerx + dxnorm * mult;
+    var controly = centery + dynorm * mult;
+    if(isNaN(controlx)){
+        controlx = centerx;
+        controly = centery;
+    }
+    return "M "+ d.source.x +" "+ d.source.y+" Q "+controlx+" "+controly+" "+d.target.x+" "+ d.target.y;
+}
+
+function noCurve(d){
+    var centerx = (d.source.x + d.target.x) / 2;
+    var centery = (d.source.y + d.target.y) / 2;
+
+    var controlx = centerx;
+    var controly = centery;
+    if(isNaN(controlx)){
+        controlx = centerx;
+        controly = centery;
+    }
+    return "M "+ d.source.x +" "+ d.source.y+" Q "+controlx+" "+controly+" "+d.target.x+" "+ d.target.y;
+}
+
+function edgePosition(n1, n2, e){
+    var count = 0;
+    var index = -1;
+    for(var ii = 0; ii < links.length; ii++){
+        if((links[ii].source.name === n1 && links[ii].target.name === n2) || (links[ii].target.name === n1 && links[ii].source.name === n2)){
+            if(links[ii].name === e){
+                index = count;
+            }
+            count++;
+        }
+    }
+    count--;
+    return index - (count/2);
+}
+
+function edgeTransition(d){
+
+    var sourcex = d.source.x;
+    var sourcey = d.source.y;
+
+    if(d.source.name === target.name){
+        sourcex = source.x;
+        sourcey = source.y;
+    }
+
+    var targetx = d.target.x;
+    var targety = d.target.y;
+
+    if(d.target.name === target.name){
+        targetx = source.x;
+        targety = source.y;
+    }
+
+    var centerx = (sourcex + targetx) / 2;
+    var centery = (sourcey + targety) / 2;
+    var slope = -1 / ((sourcey - targety) / (sourcex - targetx));
+
+    var magnitude = Math.sqrt(1 + slope * slope);
+
+    var dynorm = slope / magnitude;
+    var dxnorm = 1 / magnitude;
+    //find some way to determine a multiplier
+    var edgepos = edgePosition(d.source.name, d.target.name, d.name);
+    var mult = edge_eccentricity * edgepos;
+    var controlx = centerx + dxnorm * mult;
+    var controly = centery + dynorm * mult;
+
+    if(isNaN(controlx)){
+        controlx = centerx;
+        controly = centery;
+    }
+    var toReturn = "M "+ sourcex +" "+ sourcey+" Q "+controlx+" "+controly+" "+targetx+" "+ targety;
+    return toReturn;
+
+}
+</script>
+</body>
