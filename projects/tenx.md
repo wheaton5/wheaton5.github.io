@@ -7,12 +7,12 @@ I have been at [10X Genomics](http://www.10xgenomics.com) since October 2014, wh
 
 ### OVERVIEW
 
-<img src="/overview.jpg" alt="10X Genomics technology"  style="float:left;height:250px;margin: 0 20px 20px 0;" class="img-rounded">
+<img src="/projects/overview.jpg" alt="10X Genomics technology"  style="float:left;height:250px;margin: 0 20px 20px 0;" class="img-rounded">
 
 ### PHASING LONG MOLECULES
 
 <a href="http://www.10xgenomics.com/applications">
-<img src="/hetdel.jpg" alt="10X Het Deletion" style="float:left;height:250px;margin: 0 20px 20px 0;" class="img-rounded">
+<img src="/projects/hetdel.jpg" alt="10X Het Deletion" style="float:left;height:250px;margin: 0 20px 20px 0;" class="img-rounded">
 </a>
 
 The 10X platform can also be used for DNA sequencing. Instead of single cells, the sample is partitioned into long molecules (mean ~50kb and up to ~250kb), which are used to produce short reads with a barcode denoting the molecule of origin. The barcodes allow downstream analyses to "link" reads together according to their source molecules. Linked reads provide useful long-range information that can disambiguate between homologous regions and enable haplotype phasing across large chunks of chromosomes.
