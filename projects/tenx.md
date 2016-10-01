@@ -20,7 +20,8 @@ This can be done for either whole genome or targeted sequencing while retaining 
 This long range genetic information allows us to map into repeat regions 
 of the genome using either flanking unique sequence as is the case for short exact repeats or rare interspersed differences typical of 
 segmental duplications. Segmental duplications are increasingly being recognized as the source of new gene creation as well as gene dosing variation. 
-You can read more about this method on my white paper <a href="../projects/lariat.pdf">here</a>.
+You can read more about this method on my white paper <a href="../projects/lariat.pdf">here</a>. I was lead on this project and presented my findings 
+at Genome Informatics in September 2016. My poster is <a href="../projects/GIposter.pptx>here"</a>.
 
 ### PHASING LONG MOLECULES
 
@@ -28,6 +29,4 @@ You can read more about this method on my white paper <a href="../projects/laria
 <img src="../projects/hetdel.jpg" alt="10X Het Deletion" style="float:left;height:250px;margin: 0 20px 20px 0;" class="img-rounded">
 </a>
 
-The 10X platform can also be used for haplotype phasing. Each 
-
-I’ve made significant contributions to the development of [Long Ranger](http://support.10xgenomics.com/genome-exome/software/pipelines/latest/what-is-long-ranger), our pipeline for analyzing 10X genome and exome data. I’ve also contributed to the design and analysis of a custom exome bait set that takes advantage of linked reads to improve phasing of genes.
+The 10X platform can also be used for haplotype phasing. Because there are so many partitions/barcodes and each barcode has so few DNA molecules, the chance that a barcode has 2 molecules from the same locus in the genome but opposite haplotypes is vanishingly small. Based on this, for each cluster of reads on the genome from one barcode, the chances that all of those reads come from the same haplotype is exceedingly high. We can use this long range information to link alleles from multiple heterozygous variants into haplotypes. Then more molecules can link those alleles to even more alleles and proceeding this way we can create phase blocks that span megabases or even whole chromosome arms. 
