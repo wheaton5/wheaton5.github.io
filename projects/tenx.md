@@ -7,7 +7,7 @@ I have been at [10X Genomics](http://www.10xgenomics.com) since October 2014, wh
 
 ### OVERVIEW
 
-<img src="../projects/overview.jpg" alt="10X Genomics technology"  style="float:left;height:250px;margin: 0 20px 20px 0;" class="img-rounded">
+<img src="../projects/overview.jpg" alt="10X Genomics technology"  style="float:left;height:500px;margin: 0 20px 20px 0;" class="img-rounded">
 
 The 10X platform starts with high molecular weight DNA input into a microfluidic system which partitions those long DNA molecules into "GEMs" (Gel bead in emulsion) with oil surrounding an aqueous solution containing the DNA and reagents surrounding a gel bead containing millions of copies of the same barcode DNA sequence. Each different gel bead has a different barcode DNA oligo with high probability. Each GEM gets roughly 10 long DNA molecules. So when you map the reads from a single barcodes, they cluster into a few small regions of the genome associated with their molecule of origin. 
 
