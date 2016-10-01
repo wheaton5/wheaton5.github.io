@@ -17,6 +17,9 @@ This can be done for either whole genome or targeted sequencing while retaining 
 ### MAPPING REPEAT REGIONS OF THE GENOME
 
 <img src="../projects/repeatmapping.jpg" alt="Mapping repeat regions of the genome confidently using 10X genomics molecular barcodes" style="align:center">
+This long range genetic information allows us to map into repeat regions 
+of the genome using either flanking unique sequence as is the case for short exact repeats or rare interspersed differences typical of 
+segmental duplications. Segmental duplications are increasingly being recognized as the source of new gene creation as well as gene dosing variation. 
 You can read more about this method on my white paper <a href="wheaton5.github.io/projects/lariat.pdf">here</a>.
 
 ### PHASING LONG MOLECULES
