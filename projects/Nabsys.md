@@ -7,8 +7,6 @@ I worked at Nabsys from June 2011 to September 2013. My projects involved algori
 
 ### OVERVIEW
 
-<img src="../projects/Nabsysoverview.jpg" alt="Nabsys technology" style = "float:left; height:250px; margin: 0 20px 20px 0;" class="img-rounded" >
-
 Long DNA molecules are treated with a nicking enzyme to cut one of the two strands 
 at sequence specific motifs and then bulky tag molecules are attached to the nick sites. 
 After this, the DNA was translocated through a nanochannel and the current was measured. The current goes 
