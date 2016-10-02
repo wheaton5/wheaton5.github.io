@@ -13,13 +13,12 @@ After this, the DNA was translocated through a nanochannel and the current was m
 down when the DNA backbone enters the channel and down further when the tag molecules translocate
 the channel. This gives us a measurement of the relative locations of this sequence specific motif. 
 
-### SIGNAL PROCESSING
-
 <img src="signalprocessing.jpg" style="float:right; height:250px; margin: 0 20px 20px 0;" class="img-rounded">
 
-A distance map is analogous to an ordered restriction map or data produced by Bionanogenomic’s system. This image displays the 
-output of the signal processing and feature extraction of the current trace. I lead this project and managed one other computational biologist.
+### SIGNAL PROCESSING
 
+A distance map is analogous to an ordered restriction map or data produced by Bionanogenomic’s system. This image displays the 
+output of the signal processing and feature extraction of the current trace. I led this project and managed one other computational biologist.
 
 ### DISTANCE MAP ASSEMBLY
 
