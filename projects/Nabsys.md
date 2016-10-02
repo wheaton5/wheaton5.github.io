@@ -35,5 +35,5 @@ Knowing which tags in each source molecule are the same as the tags in other sou
 Within a set of distance map reads, all pairwise alignments are done and a graph is created whereby each tag is a node 
 and an alignment between two tags is an edge. With this reduction to a graph theoretical framework, we can use a known algorithm 
 for finding min-cuts, Karger's algorithm, along with custom constraints, to find the optimal multiple alignment. 
-An animated example of how Karger's algorithm works is located <a href="../projects/kargers.html">here</a>.  
+I made an animated D3 example of how Karger's algorithm works <a href="../projects/kargers.html">here</a>.  
 The details of this algorithm can be found on our <a href="../projects/patent2.pdf">white paper</a>.
