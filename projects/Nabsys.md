@@ -23,7 +23,7 @@ output of the signal processing and feature extraction of the current trace. I l
 ### DISTANCE MAP ASSEMBLY
 
 <img src="../projects/assembly.jpg" alt="Distance map assembly" style="float:left; height:250px;margin: 0 20px 20px 0;" class="img-rounded">
-These distance maps are useful for scaffolding assemblies of short read sequencing or for directly calling structural variants. The accuracy of these applications is greatly improved by first de novo assembling the distance map reads. On this project I worked in collaboration with Franco Preparata and Eli Upfal, both of Brown University Computer Science. You can read more about this method on my <a href="../projects/patent2.pdf">white paper</a>. 
+These distance maps are useful for scaffolding assemblies of short read sequencing or for directly calling structural variants. The accuracy of these applications is greatly improved by first de novo assembling the distance map reads. Assembling the distance maps reduces distance error and false positive and false negative tag sites as well as creating much longer consensus maps. On this project I worked in collaboration with Franco Preparata and Eli Upfal, both of Brown University Computer Science. You can read more about this method on my <a href="../projects/patent2.pdf">white paper</a>. 
 
 ### MULTIPLE ALIGNMENT OF DISTANCE MAPS
 
