@@ -3,7 +3,7 @@ layout: project
 title: 10X Genomics
 ---
 
-I have been at [10X Genomics](http://www.10xgenomics.com) since October 2014, when we were still stealth. My projects have been primarily on the DNA sequencing platform using molecular barcodes attached in emulsion to add long range genetic information to short read nextgen sequencing.
+I worked at [10X Genomics](http://www.10xgenomics.com) between October 2014, when they were still stealth, and May 2017. My projects were primarily on the DNA sequencing platform using molecular barcodes attached in emulsion to add long range genetic information to short read nextgen sequencing.
 
 ### OVERVIEW
 
