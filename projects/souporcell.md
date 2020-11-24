@@ -5,13 +5,13 @@ title: souporcell
 
 ### Overview - single cell sequencing
 
-<img src="../projects/singlecelloverview2.png" alt="Single cell RNAseq overview" style="align:center; height:350px;margin: 0 20px 20px 0;" class="img-rounded" >
+<img src="../projects/singlecelloverview2.png" alt="Single cell RNAseq overview" style="align:center; height:400px;margin: 0 20px 20px 0;" class="img-rounded" >
 
 The 10x Chromium single cell system uses a microfluidic system to create a reverse emulsion of aqueous solution with gel beads and usually 0-1 cell. The cell is lysed and reverse transcription followed by barcode attachment and amplification occur. This gives RNAseq reads barcoded by their cell of origin. I worked at 10x Genomics during the development of this system and while I primarily worked on the linked-read technology, I worked closely with the single cell computational biologists and biochemists and wrote significant code used in both longranger and cellranger.
 
 ### Souporcell
 
-<img src="../projects/fig1.jpg" alt="10X Genomics single cell RNAseq" alt="Single cell RNAseq overview" style = "align:center; height:350px;margin: 0 20px 20px 0;" class="img-rounded" >
+<img src="../projects/fig1.jpg" alt="10X Genomics single cell RNAseq" alt="Single cell RNAseq overview" style = "align:center; height:450px;margin: 0 20px 20px 0;" class="img-rounded" >
 
 Multiplexing different individuals' cells into a single cell RNAseq experiment has many advantages as an experimental design primarily because it removes batch 
 effects between samples but is also valuable for reducing cost per donor, providing information on both cross-genotype doublets and the amount of ambient RNA 
