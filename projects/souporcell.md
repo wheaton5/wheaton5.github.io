@@ -11,7 +11,7 @@ The 10x Chromium single cell system uses a microfluidic system to create a rever
 
 ### Souporcell
 
-<img src="../projects/fig1.jpg" alt="10X Genomics single cell RNAseq" alt="Single cell RNAseq overview" style = "align:center height:250px;margin: 0 20px 20px 0;" class="img-rounded" >
+<img src="../projects/fig1.jpg" alt="10X Genomics single cell RNAseq" alt="Single cell RNAseq overview" style = "align:center; height:250px;margin: 0 20px 20px 0;" class="img-rounded" >
 
 Multiplexing different individuals' cells into a single cell RNAseq experiment has many advantages as an experimental design primarily because it removes batch 
 effects between samples but is also valuable for reducing cost per donor, providing information on both cross-genotype doublets and the amount of ambient RNA 
