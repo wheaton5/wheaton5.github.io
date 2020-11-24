@@ -5,11 +5,11 @@ title: souporcell
 
 ### Overview - single cell sequencing
 
-<img src="../projects/singlecelloverview2.png" alt="10X Genomics single cell RNAseq" style = "align:center" >
+<img src="../projects/singlecelloverview2.png" alt="Single cell RNAseq overview" style="float:right; height:250px;margin: 0 20px 20px 0;" class="img-rounded" >
 
 ### Souporcell
 
-<img src="../projects/fig1.jpg" alt="souporcell" style = "align:center" >
+<img src="../projects/fig1.jpg" alt="10X Genomics single cell RNAseq" alt="Single cell RNAseq overview" style="float:right; height:250px;margin: 0 20px 20px 0;" class="img-rounded" >
 
 Multiplexing different individuals' cells into a single cell RNAseq experiment has many advantages as an experimental design primarily because it removes batch 
 effects between samples but is also valuable for reducing cost per donor, providing information on both cross-genotype doublets and the amount of ambient RNA 
