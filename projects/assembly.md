@@ -19,7 +19,7 @@ Our method is applicable to PacBio HiFi data and can use the additional informat
 
 ### phassta (phasing and assembly tools - assembly)
 
-<img src="../projects/hitseq.png" alt="phasst a" style="float:right; height:250px;margin: 0 20px 20px 0;" class="img-rounded">
+<img src="../projects/hitseq.png" alt="phassta" style = "align:center; height:450px;margin: 0 20px 20px 0;" class="img-rounded" >
 
 We first find heterozygous kmer pairs. To do this we generate the kmer count spectrum from one of the low error data types such as short reads 
 (including linked reads) or PacBio HiFi and look for pairs of kmers that occur in the heterozygous count peak and vary only in the middle base. 
