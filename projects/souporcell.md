@@ -18,4 +18,4 @@ effects between samples but is also valuable for reducing cost per donor, provid
 in the experiment. By using variants detected in scRNA-seq reads, it is possible to assign cells to their donor of origin and identify cross-genotype doublets 
 that may have highly similar transcriptional profiles, precluding detection by transcriptional profile. More subtle cross-genotype variant contamination can be 
 used to estimate the amount of ambient RNA. Ambient RNA is caused by cell lysis before droplet partitioning and is an important confounder of scRNA-seq analysis. 
-Souporcell is a method to cluster cells using the genetic variants detected within the scRNA-seq reads. [The souporcell paper can be found here.](https://link-url-here.org](https://www.nature.com/articles/s41592-020-0820-1)
+Souporcell is a method to cluster cells using the genetic variants detected within the scRNA-seq reads. [The souporcell paper can be found here.](https://www.nature.com/articles/s41592-020-0820-1)
